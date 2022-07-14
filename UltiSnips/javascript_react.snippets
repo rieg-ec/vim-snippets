@@ -1,3 +1,5 @@
+extends html, css, javascript
+
 global !p
 # Capitalize the first letter without affecting the rest of the letters
 def capitalize_first(word):
@@ -8,18 +10,33 @@ endglobal
 
 # Functional components
 snippet rfc "react functional component" b
-import React, {useState} from "react"
+import { useState } from "react"
 
-function ${1:`!p snip.rv = snip.basename`}(${2}){
+export default function ${1:`!p snip.rv = snip.basename`}(${2}){
 	return(
 		<div>
 			${3:<p>Body</p>}
 		</div>
 		)
 }
-
-export default $4`!p snip.rv = snip.basename`
 endsnippet
+
+snippet rfcn "react native functional component" b
+import React, { useState } from "react"
+import { View, Text } from 'react-native';
+import { useTailwind } from 'tailwind-rn';
+
+export default function ${1:`!p snip.rv = snip.basename`}(${2}){
+	const tailwind = useTailwind();
+
+	return(
+		<View>
+			${3:<Text>Body</Text>}
+		</View>
+		)
+}
+endsnippet
+
 # React Hooks
 snippet useS "useState Hook" b
 const [${1}, set`!p snip.rv=capitalize_first(t[1])`] = useState(${3:"${4}"})

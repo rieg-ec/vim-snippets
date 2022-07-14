@@ -18,23 +18,37 @@ snippet transition
 	<transition></transition>
 
 # The following snippets create more complex boilerplate code.
-
 snippet vbase
 	<template>
 		<div>
-
+			<div />
 		</div>
 	</template>
 
 	<script>
 		export default{
-			${0}
+			name: '${0}',
+			props: {
+			},
+			data() {
+			},
+			computed: {
+			},
+			methods: {
+			}
 		}
 	</script>
 
-	<style scoped>
+snippet vbasetup
+	<script setup>
+	  ${1}
+	</script>
 
-	</style>
+	<template>
+	  <div>
+	    ${2}
+	  </div>
+	</template>
 
 snippet vimport:c
 	import ${1:Name} from './components/$1.vue';
@@ -111,6 +125,11 @@ snippet vdata
 snippet vmounted
 	mounted() {
 		console.log('mounted');
+	},
+
+snippet vcreated
+	created() {
+		console.log('created')
 	},
 
 snippet vmethods

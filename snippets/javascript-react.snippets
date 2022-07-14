@@ -1,3 +1,5 @@
+extends html, javascript, css, reactnative
+
 # Import
 snippet ir import React
 	import React from 'react';
@@ -63,7 +65,7 @@ snippet pt propTypes
 
 snippet sdp static defaultProps
 	static defaultProps = {
-		${1}: ${2}	
+		${1}: ${2}
 	};
 
 snippet dp defaultProps
@@ -88,7 +90,7 @@ snippet sst
 		${1}: ${2}
 	});
 
-snippet tst 
+snippet tst
 	this.state.${1};
 
 # Component
@@ -188,3 +190,99 @@ snippet rdh ReactDOM.hydrate
 
 snippet rdcp ReactDOM.createPortal
 	ReactDOM.createPortal(${1:child}, ${2:container});
+
+##################### react native #####################
+snippet View
+	<View style={tailwind('${0}')}>
+	</View>
+
+snippet Text
+	<Text style={tailwind('${0}')}>
+	</Text>
+
+snippet Image
+	<Image
+		style={tailwind('${0}')}
+		source={require('')}
+	/>
+
+snippet TextInput
+	<TextInput
+		style={tailwind('${0}')}
+		onChangeText={}
+		value={}
+		placeholder=""
+		keyboardType=""
+	/>
+
+snippet ScrollView
+	<ScrollView style={tailwind('${0}')}>
+	</ScrollView>
+
+snippet TouchableOpacity
+	<TouchableOpacity
+		style={tailwind('')}
+		onPress={onPress}
+	>
+		<Text style={tailwind('')}>Press Here</Text>
+	</TouchableOpacity>
+
+snippet Button
+	<Button
+		onPress={}
+		title=""
+		style={tailwind('${0}')}
+	/>
+
+snippet Switch
+	<Switch
+		trackColor={{ false: "#767577", true: "#81b0ff" }}
+		thumbColor={"#f5dd4b"}
+		ios_backgroundColor="#3e3e3e"
+		onValueChange={toggleSwitch}
+		value={isEnabled}
+	/>
+
+snippet ActivityIndicator
+	<ActivityIndicator size="large" color="#00ff00" />
+
+snippet Alert
+	Alert.alert(
+		"Alert Title",
+		"My Alert Msg",
+		[
+			{
+				text: "Ask me later",
+				onPress: () => console.log("Ask me later pressed")
+			},
+			{
+				text: "Cancel",
+				onPress: () => console.log("Cancel Pressed"),
+				style: "cancel"
+			},
+			{ text: "OK", onPress: () => console.log("OK Pressed") }
+		]
+	);
+
+snippet Modal
+	<Modal
+		animationType="slide"
+		transparent={true}
+		visible={modalVisible}
+		onRequestClose={() => {
+			Alert.alert("Modal has been closed.");
+			setModalVisible(!modalVisible);
+		}}
+	>
+		<View style={styles.centeredView}>
+			<View style={styles.modalView}>
+				<Text style={styles.modalText}>Hello World!</Text>
+				<Pressable
+					style={[styles.button, styles.buttonClose]}
+					onPress={() => setModalVisible(!modalVisible)}
+				>
+					<Text style={styles.textStyle}>Hide Modal</Text>
+				</Pressable>
+			</View>
+		</View>
+	</Modal>
