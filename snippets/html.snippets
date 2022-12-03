@@ -867,3 +867,15 @@ snippet View
 	<View>
 		${0}
 	</View>
+
+snippet inline-svg-vue
+	<inline-svg
+		:src="require('assets/images/icons/${0}')"
+		class="w-4 h-4 fill-current"
+	/>
+
+snippet inline-svg-erb
+	<inline-svg
+		src="<%= image_path 'icons/${0}' %>"
+		class="w-4 h-4 fill-current"
+	></inline-svg>
