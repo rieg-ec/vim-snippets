@@ -192,6 +192,19 @@ snippet rdcp ReactDOM.createPortal
 	ReactDOM.createPortal(${1:child}, ${2:container});
 
 ##################### react native #####################
+snippet exportnative
+	import { useState } from 'react';
+	import { View, Text } from 'react-native';
+
+	export default function BaseText() {
+		return (
+			<View className="">
+				<Text className="">
+					Text
+				</Text>
+			</View>
+		);
+	}
 snippet View
 	<View className="${0}">
 	</View>
