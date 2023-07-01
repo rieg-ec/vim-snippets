@@ -1,4 +1,46 @@
-extends html, javascript, css, reactnative
+extends html, javascript, css, reactnative, react
+
+snippet rdiv
+	<div className="${0}">
+	</div>
+
+snippet rspan
+	<span className="${0}">
+	</span>
+
+snippet rp
+	<p className="${0}">
+	</p>
+
+snippet ra
+	<a
+		href="#"
+		className="${0}"
+	>
+	</a>
+
+snippet rimg
+	<img
+		src={${0}}
+		className="${1}"
+	/>
+
+snippet rbutton
+	<button
+		type="button"
+		className="${0}"
+		onClick={${1}}
+	>
+	</button>
+
+
+snippet rinput
+	<input
+		type=""
+		className="${0}"
+		value={${1}}
+		onChange={${2}}
+	/>
 
 # Import
 snippet ir import React
@@ -205,6 +247,71 @@ snippet exportnative
 			</View>
 		);
 	}
+
+snippet exportnativescreen export screen
+	import { useState } from 'react';
+	import { View, Text } from 'react-native';
+
+	import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+	import type { RootStackParamList } from '../types';
+
+	type Props = NativeStackScreenProps<RootStackParamList, 'ScreenName'>;
+
+	export default function ScreenName({ navigation }: Props) {
+		return (
+			<View>
+				<Text>Body</Text>
+			</View>
+		);
+	}
+
+snippet exportnativeformik export formik
+	import { View, Text, TouchableOpacity } from 'react-native';
+	import { Link } from '@react-navigation/native';
+	import { Formik } from 'formik';
+	import * as Yup from 'yup';
+
+	const ValidationSchema = Yup.object().shape({
+		email: Yup.string().email('Invalid email').required('Required'),
+		password: Yup
+			.string()
+			.required('Please enter your password.')
+			.min(8, 'Password too short.'),
+	});
+
+	export default function ScreenName() {
+		return (
+			<View className="flex flex-col h-full">
+				<Formik
+					initialValues={{ email: '', password: '' }}
+					onSubmit={(values) => console.log(values)}
+					validationSchema={ValidationSchema}
+				>
+					{({
+						errors, handleChange, handleBlur, handleSubmit, values,
+					}) => (
+						<View className="flex flex-col space-y-4">
+							<TextInput
+								placeholder="Email"
+								value={values.email}
+								onChangeText={handleChange('email')}
+								onBlur={handleBlur('email')}
+							/>
+							<TouchableOpacity
+								onPress={handleSubmit}
+								className=""
+							>
+								<Text className="text-base font-semibold">
+									Submit
+								</Text>
+							</TouchableOpacity>
+						</View>
+					)}
+				</Formik>
+			</View>
+		);
+	}
+
 snippet View
 	<View className="${0}">
 	</View>

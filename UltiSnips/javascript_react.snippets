@@ -22,18 +22,81 @@ export default function ${1:`!p snip.rv = snip.basename`}(${2}){
 endsnippet
 
 snippet rfcn "react native functional component" b
-import React, { useState } from "react"
+import { useState } from "react"
 import { View, Text } from 'react-native';
-import { useTailwind } from 'tailwind-rn';
 
 export default function ${1:`!p snip.rv = snip.basename`}(${2}){
-	const tailwind = useTailwind();
-
 	return(
-		<View>
+		<View className="">
 			${3:<Text>Body</Text>}
 		</View>
-		)
+	)
+}
+endsnippet
+
+snippet rfsn "react native screen" b
+import { useState } from 'react';
+import { View, Text } from 'react-native';
+
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { RootStackParamList } from '../types';
+
+type Props = NativeStackScreenProps<RootStackParamList, '${1:`!p snip.rv = snip.basename`}'>;
+
+export default function ${2:`!p snip.rv = snip.basename`}({ navigation }: Props) {
+	return (
+		<View>
+			<Text>Body</Text>
+		</View>
+	);
+}
+endsnippet
+
+snippet rfcnf "react native functional component with formik form" b
+import { View, Text, TouchableOpacity } from 'react-native';
+import { Link } from '@react-navigation/native';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+
+const ValidationSchema = Yup.object().shape({
+	email: Yup.string().email('Invalid email').required('Required'),
+	password: Yup
+		.string()
+		.required('Please enter your password.')
+		.min(8, 'Password too short.'),
+});
+
+export default function ${1:`!p snip.rv = snip.basename`}(${2})() {
+	return (
+		<View className="flex flex-col h-full">
+			<Formik
+				initialValues={{ email: '', password: '' }}
+				onSubmit={(values) => console.log(values)}
+				validationSchema={ValidationSchema}
+			>
+				{({
+					errors, handleChange, handleBlur, handleSubmit, values,
+				}) => (
+					<View className="flex flex-col space-y-4">
+						<TextInput
+							placeholder="Email"
+							value={values.email}
+							onChangeText={handleChange('email')}
+							onBlur={handleBlur('email')}
+						/>
+						<TouchableOpacity
+							onPress={handleSubmit}
+							className=""
+						>
+							<Text className="text-base font-semibold">
+								Submit
+							</Text>
+						</TouchableOpacity>
+					</View>
+				)}
+			</Formik>
+		</View>
+	);
 }
 endsnippet
 
